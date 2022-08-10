@@ -16,23 +16,29 @@ use Overtrue\EasySms\PhoneNumber;
 
 class UserService extends BaseService
 {
-    /*
+    /**
      * 用户名是否被使用
-     * */
+     * @param $username
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
     public function getByUsername($username){
         return User::query()->where('username',$username)->where('deleted',0)->first();
     }
 
-    /*
+    /**
      * 手机号是否被使用
-     * */
+     * @param $mobile
+     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     */
     public function getByUsermobile($mobile){
         return User::query()->where('mobile',$mobile)->where('deleted',0)->first();
     }
 
-    /*
+    /**
      * 验证码 1天10次
-     * */
+     * @param $mobile
+     * @return bool
+     */
     public function smsCountCheck($mobile){
         // 1天10次
         $code_count_key = 'reg_sms_count_' . $mobile;
@@ -48,9 +54,12 @@ class UserService extends BaseService
         return true;
     }
 
-    /*
+    /**
      * 验证码设置
-     * */
+     * @param $mobile
+     * @return string
+     * @throws \Exception
+     */
     public function setSmsCode($mobile){
         // 验证码+手机关系存储
         // 生成验证码
@@ -61,9 +70,11 @@ class UserService extends BaseService
         return $get_code;
     }
 
-    /*
+    /**
      * 验证码发送
-     * */
+     * @param $mobile
+     * @param $get_code
+     */
     public function smsSend($mobile, $get_code){
         if (app()->environment('testing')) {
             return;
@@ -75,9 +86,13 @@ class UserService extends BaseService
         )->notify(new VerificationCode($get_code));
     }
 
-    /*
-     * 验证码发送
-     * */
+    /**
+     * 验证码验证
+     * @param $mobile
+     * @param $get_code
+     * @return bool
+     * @throws BussinessException
+     */
     public function mobileSmsCheck($mobile, $get_code){
         $key = 'reg_sms_' . $mobile;
         $mobile_code = Cache::get($key);

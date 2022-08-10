@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
+        'guard' => 'wx', //默认保护器
         'passwords' => 'users',
     ],
 
@@ -38,6 +38,12 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
+            'provider' => 'users',
+        ],
+
+        // 定义保护器路由组
+        'wx' => [
+            'driver' => 'jwt',
             'provider' => 'users',
         ],
     ],

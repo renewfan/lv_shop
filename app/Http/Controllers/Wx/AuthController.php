@@ -4,20 +4,38 @@
 namespace App\Http\Controllers\Wx;
 
 
+use App\Exceptions\BussinessException;
 use App\Models\User;
 use App\ReturnCode;
 use App\Services\UserService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends WxController
 {
-    /*
+    protected $only = ['user'];
+
+    /**
+     * token获取用户信息
+     * @return JsonResponse
+     */
+    public function user()
+    {
+        $user_info = Auth::guard()->user();
+        return $this->Success($user_info);
+    }
+
+    /**
      * 注册
-     * */
+     * @param Request $request
+     * @return JsonResponse
+     * @throws BussinessException
+     */
     public function register(Request $request)
     {
         $username = $request->input('username');
@@ -26,7 +44,7 @@ class AuthController extends WxController
         $code     = $request->input('code');
 
         if (empty($username) || empty($password) || empty($mobile) || empty($code)) {
-           return $this->Fail(ReturnCode::PARAM_ILLEGAL);
+            return $this->Fail(ReturnCode::PARAM_ILLEGAL);
         }
 
         //用户名是否被注册
@@ -69,9 +87,11 @@ class AuthController extends WxController
         ]);
     }
 
-    /*
-     * 验证码
-     * */
+    /**
+     * 短信
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function regSms(Request $request)
     {
         $mobile = $request->input('mobile');
@@ -93,7 +113,8 @@ class AuthController extends WxController
 
         // 防止一直请求
         // 1min一次
-        $code_lock = Cache::add('reg_sms_lock_' . $mobile, 1);
+        // add 只存储缓存中不存在的数据。如果存储成功，将返回 true ，否则返回 false
+        $code_lock = Cache::add('reg_sms_lock_' . $mobile, 1, 60);
         if (!$code_lock) {
             return $this->Fail(ReturnCode::AUTH_CAPTCHA_FREQUENCY);
         }
@@ -114,9 +135,11 @@ class AuthController extends WxController
         return $this->Success();
     }
 
-    /*
+    /**
      * 登录
-     * */
+     * @param Request $request
+     * @return JsonResponse
+     */
     public function login(Request $request)
     {
         $username = $request->input('username');
@@ -128,26 +151,26 @@ class AuthController extends WxController
 
         // 用户是否存在
         $user = UserService::getInstance()->getByUsername($username);
-        if (!is_null($user)) {
+        if (is_null($user)) {
             return $this->Fail(ReturnCode::AUTH_INVALID_ACCOUNT);
         }
 
         // 密码是否正确
-        $password_pass = Hash::check($password,$user->getAuthPassword());
+        $password_pass = Hash::check($password, $user->getAuthPassword());
         if (!$password_pass) {
-            return $this->Fail(ReturnCode::AUTH_INVALID_ACCOUNT,'密码不正确');
+            return $this->Fail(ReturnCode::AUTH_INVALID_ACCOUNT, '密码不正确');
         }
 
         // 登录数据
         $user->last_login_time = now()->toDateTimeString();
         $user->last_login_ip   = $request->getClientIp();
-        $update_res = $user->save();
+        $update_res            = $user->save();
         if (!$update_res) {
             return $this->Fail(ReturnCode::UPDATED_FAIL);
         }
 
-        // 获取token
-        $token = '';
+        // 使用wx保护器生成token
+        $token = Auth::guard('wx')->login($user);
 
         return $this->Success([
             'token' => $token,

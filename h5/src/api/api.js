@@ -33,6 +33,7 @@ export function authLoginByAccount(data) {
   return request({
     url: AuthLoginByAccount,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -47,6 +48,7 @@ const AuthInfo='/auth/info'; //用户信息
 export function authInfo() {
   return request({
     url: AuthInfo,
+      version: 'v2',
     method: 'get'
   })
 }
