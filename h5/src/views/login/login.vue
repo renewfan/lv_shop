@@ -87,13 +87,12 @@ export default {
     login() {
       let loginData = this.getLoginData();
       authLoginByAccount(loginData).then(res => {
-        this.userInfo = res.data.data.userInfo;
+        this.userInfo = res.data.data.info;
         setLocalStorage({
           Authorization: res.data.data.token,
           avatar: this.userInfo.avatarUrl,
           nickName: this.userInfo.nickName
         });
-
         this.routerRedirect();
       }).catch(error => {
         Toast.fail(error.data.errmsg);

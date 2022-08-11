@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 
 class WxController extends Controller
 {
+    // 中间件拦截范围
     protected $only;
     protected $except;
 
@@ -36,7 +37,7 @@ class WxController extends Controller
      * @param string $in_msg
      * @return JsonResponse
      */
-    protected function codeReturn($code_msg, $data = null, $in_msg = '')
+    protected function codeReturn($code_msg, $data = null, string $in_msg = ''): JsonResponse
     {
         list($code, $msg) = $code_msg;
         $all = [
@@ -49,13 +50,21 @@ class WxController extends Controller
         return response()->json($all);
     }
 
-    protected function Success($data = null)
+    protected function success($data = null): JsonResponse
     {
         return $this->codeReturn(ReturnCode::SUCCESS, $data);
     }
 
-    protected function Fail($code_msg = ReturnCode::FAIL, $in_msg = '')
+    protected function fail($code_msg = ReturnCode::FAIL, $in_msg = ''): JsonResponse
     {
         return $this->codeReturn($code_msg, null, $in_msg);
+    }
+
+    protected function failOrSuccess($is_success,$code_msg = ReturnCode::FAIL,$data =null, $in_msg = ''): JsonResponse
+    {
+        if ($is_success) {
+            return $this->success($data);
+        }
+        return $this->fail($code_msg, $in_msg);
     }
 }

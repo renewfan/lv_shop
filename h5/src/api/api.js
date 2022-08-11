@@ -41,6 +41,7 @@ const AuthLogout='/auth/logout'; //账号登出
 export function authLogout() {
   return request({
     url: AuthLogout,
+      version: 'v2',
     method: 'post'
   })
 }
@@ -56,6 +57,7 @@ const AuthProfile='/auth/profile'; //账号修改
 export function authProfile(data) {
   return request({
     url: AuthProfile,
+      version: 'v2',
     method: 'post',
     data
   })
@@ -87,7 +89,7 @@ export function authRegisterCaptcha(data) {
     data
   })
 }
-const AuthCaptcha='/auth/captcha'; //验证码
+const AuthCaptcha='/auth/regSms'; //验证码
 export function authCaptcha(data) {
   return request({
     url: AuthCaptcha,

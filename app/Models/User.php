@@ -31,10 +31,10 @@ class User extends Authenticatable implements JWTSubject
      * 加入jwt中的自定义信息
      * @return array
      */
-    public function getJWTCustomClaims()
+    public function getJWTCustomClaims(): array
     {
         return [
-            'iss'=>'LITEMALL',
+            'iss'=>env('JWT_ISS'),
             'userId'=>$this->getKey()
         ];
     }

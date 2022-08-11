@@ -11,13 +11,14 @@ const service = axios.create({
 service.interceptors.request.use(
     config => {
     if (!config.headers['X-Litemall-Token']) {
-      config.headers['X-Litemall-Token'] = `${window.localStorage.getItem(
-        'Authorization'
-      ) || ''}`;
+      config.headers['X-Litemall-Token'] = `${window.localStorage.getItem('Authorization') || ''}`;
     }
     // 根据api中version进行域名切换
     if (config.version === 'v2') {
         config.baseURL = process.env.VUE_APP_BASE_API_v2
+        if (!config.headers['Authorization']) {
+            config.headers['Authorization'] = `Bearer ${window.localStorage.getItem('Authorization') || ''}`;
+        }
     }
     return config;
   },
@@ -28,23 +29,23 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-
-    if (res.errno === 501) {
+      console.log(res)
+    if (res.code === 501) {
         Toast.fail('请登录');
         setTimeout(() => {
           window.location = '#/login/'
         }, 1500)
       return Promise.reject('error')
-    } else if (res.errno === 502) {
+    } else if (res.code === 502) {
         Toast.fail('网站内部错误，请联系网站维护人员')
       return Promise.reject('error')
-    } if (res.errno === 401) {
+    } if (res.code === 401) {
       Toast.fail('参数不对');
       return Promise.reject('error')
-    } if (res.errno === 402) {
+    } if (res.code === 402) {
       Toast.fail('参数值不对');
       return Promise.reject('error')
-    } else if (res.errno !== 0) {
+    } else if (res.code !== 0) {
       // 非5xx的错误属于业务错误，留给具体页面处理
       return Promise.reject(response)
     } else {
