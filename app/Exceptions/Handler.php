@@ -14,7 +14,7 @@ class Handler extends ExceptionHandler
      */
     protected $dontReport = [
         //
-        BussinessException::class
+        BusinessException::class
     ];
 
     /**
@@ -42,7 +42,7 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $e)
     {
-        if ($e instanceof BussinessException) {
+        if ($e instanceof BusinessException) {
             return response()->json(
                 [
                     'code' => $e->getCode(),

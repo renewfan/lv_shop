@@ -4,7 +4,7 @@
 namespace App\Services;
 
 
-use App\Exceptions\BussinessException;
+use App\Exceptions\BusinessException;
 use App\Models\User;
 use App\Notifications\VerificationCode;
 use App\ReturnCode;
@@ -91,7 +91,7 @@ class UserService extends BaseService
      * @param $mobile
      * @param $get_code
      * @return bool
-     * @throws BussinessException
+     * @throws BusinessException
      */
     public function mobileSmsCheck($mobile, $get_code){
         $key = 'reg_sms_' . $mobile;
@@ -101,7 +101,7 @@ class UserService extends BaseService
             Cache::forget($key);
             return true;
         } else {
-            throw new BussinessException(ReturnCode::AUTH_CAPTCHA_UNMATCH);
+            throw new BusinessException(ReturnCode::AUTH_CAPTCHA_UNMATCH);
         }
     }
 }

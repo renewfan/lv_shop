@@ -4,6 +4,8 @@
 namespace App\Services;
 
 
+use App\Exceptions\BusinessException;
+
 class BaseService
 {
     // 创建单例
@@ -32,5 +34,9 @@ class BaseService
         // 未被创建--创建实例
         static::$instance = new static();
         return static::$instance;
+    }
+
+    public function throwBusinessException($codeResponse){
+        throw new BusinessException($codeResponse);
     }
 }

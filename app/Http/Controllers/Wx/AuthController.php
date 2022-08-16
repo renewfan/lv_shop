@@ -4,7 +4,7 @@
 namespace App\Http\Controllers\Wx;
 
 
-use App\Exceptions\BussinessException;
+use App\Exceptions\BusinessException;
 use App\Models\User;
 use App\ReturnCode;
 use App\Services\UserService;
@@ -25,7 +25,7 @@ class AuthController extends WxController
      * 注册
      * @param Request $request
      * @return JsonResponse
-     * @throws BussinessException
+     * @throws BusinessException
      */
     public function register(Request $request)
     {
@@ -203,7 +203,7 @@ class AuthController extends WxController
      * 重置密码
      * @param Request $request
      * @return JsonResponse
-     * @throws BussinessException
+     * @throws BusinessException
      */
     public function reset(Request $request)
     {
