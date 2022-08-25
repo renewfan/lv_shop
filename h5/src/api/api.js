@@ -4,6 +4,7 @@ const IndexUrl= '/home/index'; //首页数据接口
 export function getHome() {
   return request({
     url: IndexUrl,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -12,6 +13,7 @@ const CatalogList='/catalog/index'; //分类目录全部分类数据接口
 export function catalogList() {
   return request({
     url: CatalogList,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -21,6 +23,7 @@ export function catalogCurrent(query) {
   return request({
     url: CatalogCurrent,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -103,6 +106,7 @@ const GoodsCount='/goods/count'; //统计商品总数
 export function goodsCount() {
   return request({
     url: GoodsCount,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -111,6 +115,7 @@ export function goodsList(query) {
   return request({
     url: GoodsList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -119,6 +124,7 @@ export function goodsCategory(query) {
   return request({
     url: GoodsCategory,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -127,6 +133,7 @@ export function goodsDetail(query) {
   return request({
     url: GoodsDetail,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -137,6 +144,7 @@ export function brandList(query) {
   return request({
     url: BrandList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -145,6 +153,7 @@ export function brandDetail(query) {
   return request({
     url: BrandDetail,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -154,6 +163,7 @@ export function cartList(query) {
   return request({
     url: CartList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -162,6 +172,7 @@ export function cartAdd(data) {
   return request({
     url: CartAdd,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -170,6 +181,7 @@ export function cartFastAdd(data) {
   return request({
     url: CartFastAdd,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -178,6 +190,7 @@ export function cartUpdate(data) {
   return request({
     url: CartUpdate,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -186,6 +199,7 @@ export function cartDelete(data) {
   return request({
     url: CartDelete,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -194,6 +208,7 @@ export function cartChecked(data) {
   return request({
     url: CartChecked,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -201,6 +216,7 @@ const CartGoodsCount='/cart/goodscount'; // 获取购物车商品件数
 export function cartGoodsCount() {
   return request({
     url: CartGoodsCount,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -209,6 +225,7 @@ export function cartCheckout(query) {
   return request({
     url: CartCheckout,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -218,6 +235,7 @@ export function collectList(query) {
   return request({
     url: CollectList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -226,6 +244,7 @@ export function collectAddOrDelete(data) {
   return request({
     url: CollectAddOrDelete,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -238,6 +257,7 @@ export function topicList(query) {
   return request({
     url: TopicList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -246,6 +266,7 @@ export function topicDetail(query) {
   return request({
     url: TopicDetail,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -254,6 +275,7 @@ export function topicRelated(query) {
   return request({
     url: TopicRelated,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -268,6 +290,7 @@ export function addressList(query) {
   return request({
     url: AddressList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -277,6 +300,7 @@ export function addressDetail(query) {
   return request({
     url: AddressDetail,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -284,6 +308,7 @@ const AddressSave='/address/save'; //保存收货地址
 export function addressSave(data) {
   return request({
     url: AddressSave,
+      version: 'v2',
     method: 'post',
     data
   })
@@ -292,6 +317,7 @@ const AddressDelete='/address/delete'; //保存收货地址
 export function addressDelete(data) {
   return request({
     url: AddressDelete,
+      version: 'v2',
     method: 'post',
     data
   })
@@ -304,6 +330,7 @@ export function orderSubmit(data) {
   return request({
     url: OrderSubmit,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -312,6 +339,7 @@ export function orderPrepay(data) {
   return request({
     url: OrderPrepay,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -320,6 +348,7 @@ export function orderH5pay(data) {
   return request({
     url: OrderH5pay,
     method: 'post',
+      version: 'v2',
     data
   });
 }
@@ -328,6 +357,7 @@ export function orderList(query) {
   return request({
     url: OrderList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -336,6 +366,7 @@ export function orderDetail(query) {
   return request({
     url: OrderDetail,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -344,6 +375,7 @@ export function orderCancel(data) {
   return request({
     url: OrderCancel,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -352,6 +384,7 @@ export function orderRefund(data) {
   return request({
     url: OrderRefund,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -360,6 +393,7 @@ export function orderDelete(data) {
   return request({
     url: OrderDelete,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -368,6 +402,7 @@ export function orderConfirm(data) {
   return request({
     url: OrderConfirm,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -379,6 +414,7 @@ export function feedbackAdd(data) {
   return request({
     url: FeedbackAdd,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -391,6 +427,7 @@ export function grouponList(query) {
   return request({
     url: GrouponList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -404,6 +441,7 @@ export function couponList(query) {
   return request({
     url: CouponList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -412,6 +450,7 @@ export function couponMyList(query) {
   return request({
     url: CouponMyList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -420,6 +459,7 @@ export function couponSelectList(query) {
   return request({
     url: CouponSelectList,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
@@ -428,6 +468,7 @@ export function couponReceive(data) {
   return request({
     url: CouponReceive,
     method: 'post',
+      version: 'v2',
     data
   })
 }
@@ -439,6 +480,7 @@ const UserIndex='/user/index'; //个人页面用户相关信息
 export function userIndex() {
   return request({
     url: UserIndex,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -446,6 +488,7 @@ const IssueList='/issue/list'; //帮助信息
 export function issueList() {
   return request({
     url: IssueList,
+      version: 'v2',
     method: 'get'
   })
 }
@@ -454,6 +497,7 @@ export function getList(api, query) {
   return request({
     url: api,
     method: 'get',
+      version: 'v2',
     params: query
   })
 }
