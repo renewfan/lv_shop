@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Wx\User;
 
 use App\Exceptions\BusinessException;
 use App\Http\Controllers\Wx\WxController;
+use App\Models\User\User;
 use App\ReturnCode;
 use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;

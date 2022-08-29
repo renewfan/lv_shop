@@ -20,7 +20,7 @@ class UserService extends BaseService
     /**
      * 用户名是否被使用
      * @param $username
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return object|null
      */
     public function getByUsername($username){
         return User::query()->where('username',$username)->where('deleted',0)->first();
@@ -29,7 +29,7 @@ class UserService extends BaseService
     /**
      * 手机号是否被使用
      * @param $mobile
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
+     * @return object|null
      */
     public function getByUsermobile($mobile){
         return User::query()->where('mobile',$mobile)->where('deleted',0)->first();
