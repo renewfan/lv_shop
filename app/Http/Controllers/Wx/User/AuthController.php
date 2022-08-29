@@ -1,13 +1,13 @@
 <?php
 
 
-namespace App\Http\Controllers\Wx;
+namespace App\Http\Controllers\Wx\User;
 
 
 use App\Exceptions\BusinessException;
-use App\Models\User;
+use App\Http\Controllers\Wx\WxController;
 use App\ReturnCode;
-use App\Services\UserService;
+use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;

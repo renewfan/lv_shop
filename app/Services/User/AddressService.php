@@ -1,12 +1,13 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\User;
 
 
 use App\Exceptions\BusinessException;
-use App\Models\Address;
+use App\Models\User\Address;
 use App\ReturnCode;
+use App\Services\BaseService;
 
 class AddressService extends BaseService
 {

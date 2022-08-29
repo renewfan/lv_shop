@@ -1,12 +1,12 @@
 <?php
 
 
-namespace App\Models;
+namespace App\Models\Goods;
 
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 
-class Catalog extends Model
+class Catalog extends BaseModel
 {
     // 不指定表名将使用类的复数形式「蛇形命名」来作为表名
     protected $table = 'category';

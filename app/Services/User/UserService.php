@@ -1,13 +1,14 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\User;
 
 
 use App\Exceptions\BusinessException;
-use App\Models\User;
+use App\Models\User\User;
 use App\Notifications\VerificationCode;
 use App\ReturnCode;
+use App\Services\BaseService;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Notification;
@@ -64,6 +65,10 @@ class UserService extends BaseService
         // 验证码+手机关系存储
         // 生成验证码
         $key = 'reg_sms_' . $mobile;
+        // 测试环境固定短信码
+        if (app()->environment('testing')) {
+            $get_code = 123456;
+        }
         $get_code = random_int(100000, 999999);
         $get_code = strval($get_code); // 转字符串类型
         Cache::put($key, $get_code, 600);
@@ -76,10 +81,6 @@ class UserService extends BaseService
      * @param $get_code
      */
     public function smsSend($mobile, $get_code){
-        if (app()->environment('testing')) {
-            return;
-        }
-
         Notification::route(
             EasySmsChannel::class,
             new PhoneNumber($mobile, 86)

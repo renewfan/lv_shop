@@ -1,10 +1,11 @@
 <?php
 
 
-namespace App\Http\Controllers\Wx;
+namespace App\Http\Controllers\Wx\Goods;
 
+use App\Http\Controllers\Wx\WxController;
 use App\ReturnCode;
-use App\Services\CatalogService;
+use App\Services\Goods\CatalogService;
 use Illuminate\Http\Request;
 
 class CatalogController extends WxController
@@ -30,7 +31,7 @@ class CatalogController extends WxController
         }
 
         // 当前一级下二级
-        $l2_list = [];
+        $l2_list = null;
         if (!is_null($current)) {
             $l2_list = CatalogService::getInstance()->getL2ListByPid($current->id);
         }
@@ -62,7 +63,7 @@ class CatalogController extends WxController
         $current = CatalogService::getInstance()->getL1ListByid($id);
 
         if (is_null($current)) {
-            return $this->codeReturn(ReturnCode::PARAM_ILLEGAL);
+            return $this->codeReturn(ReturnCode::PARAM_VALUE_ILLEGAL);
         }
 
         // 当前一级下二级

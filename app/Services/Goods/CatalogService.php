@@ -1,12 +1,11 @@
 <?php
 
 
-namespace App\Services;
+namespace App\Services\Goods;
 
 
-use App\Exceptions\BusinessException;
-use App\Models\Catalog;
-use App\ReturnCode;
+use App\Models\Goods\Catalog;
+use App\Services\BaseService;
 
 class CatalogService extends BaseService
 {

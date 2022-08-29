@@ -45,6 +45,12 @@ class WxController extends Controller
             'msg'  => $in_msg ?: $msg
         ];
         if (!is_null($data)) {
+            if (is_array($data)) {
+                // 数组情况，过滤null
+                $data = array_filter($data, function ($item){
+                    return $item != null;
+                });
+            }
             $all['data'] = $data;
         }
         return response()->json($all);

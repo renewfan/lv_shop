@@ -1,19 +1,19 @@
 <?php
 
 
-namespace App\Http\Controllers\Wx;
+namespace App\Http\Controllers\Wx\User;
 
-use App\Models\Address;
+use App\Http\Controllers\Wx\WxController;
 use App\ReturnCode;
-use App\Services\AddressService;
+use App\Services\User\AddressService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AddressController extends WxController
 {
     // 中间件使用范围
-    protected $only = ['list','deleted','detail'];
+    protected $only = ['list', 'deleted', 'detail'];
+
     /**
      * 地址列表
      * @return \Illuminate\Http\JsonResponse
@@ -22,15 +22,6 @@ class AddressController extends WxController
     {
         $user_id = Auth::id();
         $list    = AddressService::getInstance()->getListByUserId($user_id);
-        $list    = $list->map(function (Address $address) {
-            $address = $address->toArray();
-            $item    = [];
-            foreach ($address as $k => $v) {
-                $k        = lcfirst(Str::studly($k));
-                $item[$k] = $v;
-            }
-            return $item;
-        });
 
         return $this->success(
             [
@@ -50,11 +41,11 @@ class AddressController extends WxController
      */
     public function deleted(Request $request)
     {
-        $id = $request->input('id',0);
+        $id = $request->input('id', 0);
         if (empty($id) && !is_numeric($id)) {
             return $this->fail(ReturnCode::PARAM_ILLEGAL);
         }
-        AddressService::getInstance()->delete(Auth::id(),$id);
+        AddressService::getInstance()->delete(Auth::id(), $id);
         return $this->success();
     }
 
@@ -65,7 +56,7 @@ class AddressController extends WxController
      */
     public function detail(Request $request)
     {
-        $id = $request->input('id',0);
+        $id = $request->input('id', 0);
         if (empty($id) && !is_numeric($id)) {
             return $this->fail(ReturnCode::PARAM_ILLEGAL);
         }

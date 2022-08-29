@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Wx\AuthController;
-use App\Http\Controllers\Wx\AddressController;
-use App\Http\Controllers\Wx\CatalogController;
+use App\Http\Controllers\Wx\User\AuthController;
+use App\Http\Controllers\Wx\User\AddressController;
+use App\Http\Controllers\Wx\Goods\CatalogController;
 
 // 注册登录
 Route::post('auth/register', [AuthController::class, 'register']); // 注册
