@@ -50,7 +50,7 @@ class UserService extends BaseService
             }
         } else {
             // 当前时间到第二天0点间隔
-            Cache::put($code_count_key, 1, Carbon::tomorrow()->diff(now()));
+            Cache::put($code_count_key, 1, Carbon::tomorrow()->diffInSeconds(now()));
         }
         return true;
     }
@@ -66,11 +66,11 @@ class UserService extends BaseService
         // 生成验证码
         $key = 'reg_sms_' . $mobile;
         // 测试环境固定短信码
-        if (app()->environment('testing')) {
-            $get_code = 123456;
+        $get_code = 123456;
+        if (!app()->environment('testing')) {
+            $get_code = random_int(100000, 999999);
+            $get_code = strval($get_code); // 转字符串类型
         }
-        $get_code = random_int(100000, 999999);
-        $get_code = strval($get_code); // 转字符串类型
         Cache::put($key, $get_code, 600);
         return $get_code;
     }

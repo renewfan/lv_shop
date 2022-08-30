@@ -9,8 +9,9 @@ use App\Exceptions\BusinessException;
 class BaseService
 {
     // 创建单例
-    // 私有静态变量
+    // 保护静态变量--子类也可以访问
     protected static $instance;
+
     // 防止其他地方、其他方式创建实例
     // 私有构造函数
     private function __construct()

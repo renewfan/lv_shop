@@ -20,7 +20,8 @@
     <php>
         <server name="APP_ENV" value="testing"/>
         <server name="BCRYPT_ROUNDS" value="4"/>
-        <server name="CACHE_DRIVER" value="array"/>
+        <!-- 缓存类型 -->
+        <server name="CACHE_DRIVER" value="redis"/>
         <!-- 即 使用database.php connections 下mysql配置进行连接 -->
         <server name="DB_CONNECTION" value="mysql"/>
         <server name="DB_DATABASE" value="litemall"/>

@@ -13,7 +13,7 @@ class Handler extends ExceptionHandler
      * @var array<int, class-string<Throwable>>
      */
     protected $dontReport = [
-        //
+        // 指定异常不报告
         BusinessException::class
     ];
 
@@ -40,6 +40,13 @@ class Handler extends ExceptionHandler
         });
     }
 
+    /**
+     * 异常统一返回
+     * @param \Illuminate\Http\Request $request
+     * @param Throwable $e
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\Response|\Symfony\Component\HttpFoundation\Response
+     * @throws Throwable
+     */
     public function render($request, Throwable $e)
     {
         if ($e instanceof BusinessException) {

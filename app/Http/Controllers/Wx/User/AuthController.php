@@ -123,8 +123,10 @@ class AuthController extends WxController
         $get_code = UserService::getInstance()->setSmsCode($mobile);
 
         // 发送 -- https://github.com/overtrue/easy-sms
-        // https://github.com/yl/easysms-notification-channel
-        //UserService::getInstance()->smsSend($mobile, $get_code);
+        if (!app()->environment('testing')) {
+            // https://github.com/yl/easysms-notification-channel
+            UserService::getInstance()->smsSend($mobile, $get_code);
+        }
 
         return $this->success();
     }
