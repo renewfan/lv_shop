@@ -6,12 +6,16 @@ namespace App\Models\User;
 // 授权验证
 use App\Models\BaseModel;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+
 // 获取用户的唯一标识符名称、获取用户的唯一标识符、获取用户的密码、获取 "记住我 "会话的token、设置 "记住我 "会话的token、获取 "记住我 "会话的token名称
 use Illuminate\Auth\Authenticatable;
+
 // 认证
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+
 // 确定该实体是否具有给定的能力
 use Illuminate\Foundation\Auth\Access\Authorizable;
+
 // jwt
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -20,6 +24,7 @@ class User extends BaseModel implements
     AuthorizableContract,
     JWTSubject
 {
+    // token相关
     use Authenticatable, Authorizable;
 
     // 不指定表名将使用类的复数形式「蛇形命名」来作为表名

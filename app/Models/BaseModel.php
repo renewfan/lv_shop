@@ -14,12 +14,17 @@ class BaseModel extends Model
      */
     public function toArray()
     {
+        // 获取数据
         $items  = parent::toArray();
         $keys   = array_keys($items);
         $values = array_values($items);
-        $keys   = array_map(function ($key) {
+        // key 转换
+        $keys = array_map(function ($key) {
+            // key转驼峰，再首字母小写
+            // is_default --> IsDefault --> isDefault
             return lcfirst(Str::studly($key));
         }, $keys);
+        // key-value 重组
         return array_combine($keys, $values);
     }
 }

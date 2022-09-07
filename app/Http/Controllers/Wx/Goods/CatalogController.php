@@ -19,7 +19,7 @@ class CatalogController extends WxController
      */
     public function index(Request $request)
     {
-        $id      = $request->input('id', 0);
+        $id = $request->input('id', 0);
         // 所有一级
         $l1_list = CatalogService::getInstance()->getL1List();
 
